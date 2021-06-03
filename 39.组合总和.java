@@ -25,6 +25,7 @@ class Solution {
         for(int i = 0; i < candidates.length; i++){
             if(target < candidates[i]) break;
             if(temp.size() > 0 && temp.get(temp.size()-1) > candidates[i]) continue;
+            
             temp.add(candidates[i]);
             dfs(res, target-candidates[i], temp, candidates);
             temp.remove(temp.size()-1);

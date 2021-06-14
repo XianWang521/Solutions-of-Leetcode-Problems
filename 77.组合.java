@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-
 /*
  * @lc app=leetcode.cn id=77 lang=java
  *
@@ -11,23 +10,20 @@ class Solution {
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> res = new ArrayList<>();
         ArrayList<Integer> temp = new ArrayList<Integer>();
-        int[] candidates = new int[n];
-        for(int i = 0; i < n; i++)
-            candidates[i] = i + 1;
-        dfs(res, k, temp, candidates, 0);
+        dfs(res, k, temp, 0, n);
         return res;
     }
 
-    public void dfs(List<List<Integer>> res, int k, ArrayList<Integer> temp, int[] candidates, int index){
+    public void dfs(List<List<Integer>> res, int k, ArrayList<Integer> temp, int index, int n){
         if(k == 0) {
             res.add(new ArrayList<Integer>(temp));
             return;
         }
-
-        for(int i = index; i < candidates.length; i++){
-            if(!temp.contains(candidates[i]) || temp.size() == 0) temp.add(candidates[i]);
-            else continue;
-            dfs(res, k-1, temp, candidates, i+1);
+        
+        for(int i = index; i < n; i++){
+            if(temp.size() + n - index < k) return;
+            if(!temp.contains(i+1) || temp.size() == 0) temp.add(i+1);
+            dfs(res, k-1, temp, i+1, n);
             temp.remove(temp.size()-1);
         }
     }

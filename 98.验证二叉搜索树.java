@@ -22,7 +22,13 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
+        return isValid(root, Long.MAX_VALUE, Long.MIN_VALUE);
+    }
 
+    public boolean isValid(TreeNode root, long max_val, long min_val){
+        if(root == null) return true;
+        if(root.val <= min_val || root.val >= max_val) return false;
+        return isValid(root.left, root.val, min_val) && isValid(root.right, max_val, root.val);
     }
 }
 // @lc code=end

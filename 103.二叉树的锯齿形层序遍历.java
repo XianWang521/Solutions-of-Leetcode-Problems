@@ -1,11 +1,7 @@
-import java.util.LinkedList;
-
-import javax.swing.tree.TreeNode;
-
 /*
- * @lc app=leetcode.cn id=102 lang=java
+ * @lc app=leetcode.cn id=103 lang=java
  *
- * [102] 二叉树的层序遍历
+ * [103] 二叉树的锯齿形层序遍历
  */
 
 // @lc code=start
@@ -25,23 +21,26 @@ import javax.swing.tree.TreeNode;
  * }
  */
 class Solution {
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
         LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
         if(root == null) return res;
         else queue.add(root);
 
+        boolean left = true;
         while(queue.size() > 0){
             ArrayList<Integer> temp = new ArrayList<Integer>();
             int num = queue.size();
             for(int i = 0; i < num; i++){
                 TreeNode s = queue.remove();
-                temp.add(s.val);
-                
+                if(left) temp.add(s.val);
+                else temp.add(0, s.val);
+
                 if(s.left != null) queue.add(s.left);
                 if(s.right != null) queue.add(s.right);
             }
             res.add(temp);
+            left = !left;
         }
         return res;
     }

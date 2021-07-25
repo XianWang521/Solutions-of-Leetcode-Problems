@@ -22,15 +22,15 @@
  */
 // Follow official solution 
 class Solution {
+    Map<Integer, Integer> map = new HashMap<Integer, Integer>();
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         int n = preorder.length;
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for(int i = 0; i < n; i++)
             map.put(inorder[i], i);
-        TreeNode res = solve(map, preorder, inorder, 0, n-1, 0, n-1);
+        TreeNode res = solve(preorder, 0, n-1, 0, n-1);
         return res;
     }
-    private TreeNode solve(Map<Integer, Integer> map, int[] preorder, int[] inorder, int pre_left, int pre_right, int in_left, int in_right){
+    private TreeNode solve(int[] preorder, int pre_left, int pre_right, int in_left, int in_right){
         if(pre_left > pre_right) return null;
         // The first node in the preorder traversal is the root node
         int pre_root = pre_left;
@@ -40,8 +40,8 @@ class Solution {
         TreeNode root = new TreeNode(preorder[pre_root]);
         // Get the number of nodes in the left subtree
         int size = in_root - in_left;
-        root.left = solve(map, preorder, inorder, pre_left+1, pre_left+size, in_left, in_root-1);
-        root.right = solve(map, preorder, inorder, pre_left+1+size, pre_right, in_root+1, in_right);
+        root.left = solve(preorder, pre_left+1, pre_left+size, in_left, in_root-1);
+        root.right = solve(preorder, pre_left+1+size, pre_right, in_root+1, in_right);
         return root;
     }
 }

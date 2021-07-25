@@ -32,12 +32,16 @@ class Solution {
     }
     private TreeNode solve(Map<Integer, Integer> map, int[] preorder, int[] inorder, int pre_left, int pre_right, int in_left, int in_right){
         if(pre_left > pre_right) return null;
-        int pre_temp = pre_left;
-        int in_temp = map.get(preorder[pre_temp]);
-        TreeNode root = new TreeNode(preorder[pre_temp]);
-        int size = in_temp - in_left;
-        root.left = solve(map, preorder, inorder, pre_left+1, pre_left+size, in_left, in_temp-1);
-        root.right = solve(map, preorder, inorder, pre_left+1+size, pre_right, in_temp+1, in_right);
+        // The first node in the preorder traversal is the root node
+        int pre_root = pre_left;
+        // Locate the root node in the inorder traversal
+        int in_root = map.get(preorder[pre_root]);
+
+        TreeNode root = new TreeNode(preorder[pre_root]);
+        // Get the number of nodes in the left subtree
+        int size = in_root - in_left;
+        root.left = solve(map, preorder, inorder, pre_left+1, pre_left+size, in_left, in_root-1);
+        root.right = solve(map, preorder, inorder, pre_left+1+size, pre_right, in_root+1, in_right);
         return root;
     }
 }

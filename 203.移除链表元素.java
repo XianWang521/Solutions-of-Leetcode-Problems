@@ -24,7 +24,7 @@ class Solution {
             if(p.next.val == val){
                 p.next = p.next.next;
             }
-            else p = p.next;
+            else p = p.next;    
         }
         return dummy.next;
     }

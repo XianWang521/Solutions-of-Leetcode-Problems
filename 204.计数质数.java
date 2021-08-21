@@ -7,6 +7,12 @@ import java.util.Arrays;
  */
 
 // @lc code=start
+class Solution {
+    public int countPrimes(int n) {
+        
+    }
+}
+/*
 // Sieve Of Eratosthenes refer from official solution
 class Solution {
     public int countPrimes(int n) {
@@ -24,6 +30,8 @@ class Solution {
         return res;
     }
 }
+*/
+
 /* Time Limit Exceeded
 class Solution {
     public int countPrimes(int n) {

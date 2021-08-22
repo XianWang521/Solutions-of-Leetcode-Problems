@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 /*
  * @lc app=leetcode.cn id=204 lang=java
@@ -7,9 +10,24 @@ import java.util.Arrays;
  */
 
 // @lc code=start
+// Sieve Of Euler
 class Solution {
     public int countPrimes(int n) {
-        
+        int[] isPrime = new int[n];
+        Arrays.fill(isPrime, 1);
+        List<Integer> primes = new ArrayList<Integer>();
+        for(int i = 2; i < n; i++){
+            if(isPrime[i] == 1) primes.add(i);
+            
+            for(int j = 0; j < primes.size() && i * primes.get(j) < n; j++){
+                isPrime[i * primes.get(j)] = 0;
+                if(i % primes.get(j) == 0) break;
+            }
+        }
+        int res = 0;
+        for(int i = 2; i < n; i++)
+            if(isPrime[i] == 1) res++;
+        return res;
     }
 }
 /*

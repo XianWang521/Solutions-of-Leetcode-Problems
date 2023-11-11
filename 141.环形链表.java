@@ -19,12 +19,13 @@
 /* Tortoise and Rabbit: Fast and slow pointers */
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        if(head == null || head.next == null) return false;
-        ListNode fast =  head.next, slow = head;
-        while(slow != fast){
+        ListNode fast = head, slow = head;
+
+        while(true){
             if(fast == null || fast.next == null) return false;
             slow = slow.next;
             fast = fast.next.next;
+            if(fast == slow) break;
         }
         return true;
     }
